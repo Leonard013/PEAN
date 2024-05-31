@@ -150,7 +150,23 @@ def evaluate(config, model, data_iter, test=False):
     if test:
         print("\nTime Difference (s): " + str(diff))
         print("Per Sample Use (s): " + str(diff / datasize) + "\n")
-        report = metrics.classification_report(labels_all, predict_all, target_names=config.class_list, digits=4)
+
+        # --------------------------------------------
+        print("------"*10)
+        print("\n")
+        print("labels_all: ", labels_all)
+        print("predict_all: ", predict_all)
+        print("\n")
+        print("------"*10)
+        
+        # @leonardo
+        # --------------------------------------------
+        
+        all_possible_labels = list(range(len(config.class_list)))
+        report = metrics.classification_report(labels_all, predict_all, 
+                                                target_names=config.class_list,
+                                                labels=all_possible_labels, 
+                                                digits=4)
         print(report)
         confusion = metrics.confusion_matrix(labels_all, predict_all)
         f1 = metrics.f1_score(labels_all, predict_all, average='macro')

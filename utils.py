@@ -106,7 +106,24 @@ class DatasetIterater(object):
     def __init__(self, batches, batch_size, device, pad_len_seq):
         self.batch_size = batch_size
         self.batches = batches
+
+        # --------------------------------------------
+        print("\n")
+        print("batches: ", len(batches))
+        print("batch_size: ", batch_size)
+        print("batches // batch_size: ", len(batches) // batch_size)
+        print("batches % batch_size: ", len(batches) % batch_size)
+        print("------"*10)
+        print("\n")
+        # self.n_batches = len(batches) // batch_size
+        # self.n_batches = max(len(batches) // batch_size, 1)
         self.n_batches = len(batches) // batch_size
+        if self.n_batches == 0:
+            self.batch_size = len(batches)  # Adjust batch size to dataset size
+            self.n_batches = 1
+        #@leonardo
+        # --------------------------------------------
+
         self.residue = False
         if len(batches) % self.n_batches != 0:
             self.residue = True

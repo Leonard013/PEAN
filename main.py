@@ -149,6 +149,7 @@ def prepare_data():
 
 if __name__ == '__main__':
     config = get_config()
+
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
